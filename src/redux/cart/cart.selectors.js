@@ -28,3 +28,8 @@ export const cartTotalSelector = createSelector(
     return total;
   }
 );
+
+export const selectCartHidden = createSelector(
+  cartSelector,
+  (cart) => cart.hidden
+);
