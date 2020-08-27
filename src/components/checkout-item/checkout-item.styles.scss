@@ -1,0 +1,10 @@
+.checkout-item {
+  .quantity-up,
+  .quantity-down,
+  .remove {
+    padding: 10px;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}

@@ -15,11 +15,9 @@ const CartItem = ({ id, name, imageUrl, price, quantity }) => {
   );
 };
 
-const mapStateToProps = ({ cart, shop }, { id }) => {
-  return {
-    ...shop.items.find((item) => item.id === id),
-    quantity: cart.items[id],
-  };
-};
+const mapStateToProps = ({ cart, shop }, { id }) => ({
+  ...shop.items.find((item) => item.id === id),
+  quantity: cart.items[id],
+});
 
 export default connect(mapStateToProps)(CartItem);

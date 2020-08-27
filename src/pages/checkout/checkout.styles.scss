@@ -1,0 +1,38 @@
+.checkout-page {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 18px;
+
+  .checkout-item,
+  .checkout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    > * {
+      width: 18%;
+      text-align: center;
+    }
+  }
+
+  .empty-message {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .checkout-header {
+    padding-bottom: 20px;
+  }
+
+  .checkout-items,
+  .checkout-header {
+    border-bottom: 2px solid #aaa;
+  }
+
+  .total {
+    margin-top: 20px;
+    font-size: 32px;
+    text-align: right;
+  }
+}
