@@ -1,10 +1,9 @@
 import { createSelector } from "reselect";
+import memoize from "lodash.memoize";
+import { selectShopItems } from "../shop/shop.selectors";
 
 const cartSelector = (state) => state.cart;
 const cartItemsSelector = createSelector([cartSelector], (cart) => cart.items);
-
-const shopSelector = (state) => state.shop;
-const shopItemsSelector = createSelector(shopSelector, (shop) => shop.items);
 
 export const cartItemsCountSelector = createSelector(
   cartItemsSelector,
@@ -16,13 +15,13 @@ export const cartItemIdsSelector = createSelector(cartItemsSelector, (items) =>
 );
 
 export const cartTotalSelector = createSelector(
-  [cartItemsSelector, shopItemsSelector],
+  [cartItemsSelector, selectShopItems],
   (cartItems, shopItems) => {
     let total = 0;
     for (let id in cartItems) {
       const itemId = parseInt(id);
       const quantity = cartItems[id];
-      const price = shopItems.find((item) => item.id === itemId).price;
+      const price = shopItems[itemId].price;
       total += price * quantity;
     }
     return total;
@@ -32,4 +31,8 @@ export const cartTotalSelector = createSelector(
 export const selectCartHidden = createSelector(
   cartSelector,
   (cart) => cart.hidden
+);
+
+export const selectItemQuantity = memoize((itemId) =>
+  createSelector(cartItemsSelector, (cart) => cart[itemId])
 );

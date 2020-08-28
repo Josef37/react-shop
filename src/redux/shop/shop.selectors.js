@@ -13,9 +13,10 @@ export const selectShopItems = createSelector(selectShop, (shop) => shop.items);
 export const selectCollection = memoize((collectionUrlParam) =>
   createSelector(
     selectShopCollections,
-    (collections) =>
-      collections.find(
-        (collection) => collection.routeName === collectionUrlParam
-      ) || { title: "No such category", itemIds: [] }
+    (collections) => collections[collectionUrlParam]
   )
+);
+
+export const selectItem = memoize((itemId) =>
+  createSelector(selectShopItems, (items) => items[itemId])
 );

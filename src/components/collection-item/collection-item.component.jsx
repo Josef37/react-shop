@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { addItemToCart } from "../../redux/cart/cart.actions";
+import { selectItem } from "../../redux/shop/shop.selectors";
 
 import CustomButton from "../custom-button/custom-button.component";
 import "./collection-item.styles.scss";
@@ -21,8 +22,7 @@ const CollectionItem = ({ id, name, imageUrl, price, addItem }) => {
   );
 };
 
-const mapStateToProps = ({ shop }, { id }) =>
-  shop.items.find((item) => item.id === id);
+const mapStateToProps = (state, { id }) => selectItem(id)(state);
 
 const mapDispatchToProps = (dispatch) => ({
   addItem: (itemId) => dispatch(addItemToCart(itemId)),

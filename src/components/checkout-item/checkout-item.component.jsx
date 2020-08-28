@@ -6,6 +6,8 @@ import {
   subtractItemFromCart,
   removeItemFromCart,
 } from "../../redux/cart/cart.actions";
+import { selectItem } from "../../redux/shop/shop.selectors";
+import { selectItemQuantity } from "../../redux/cart/cart.selectors";
 
 import "./checkout-item.styles.scss";
 
@@ -42,9 +44,9 @@ const CheckoutItem = ({
   );
 };
 
-const mapStateToProps = ({ cart, shop }, { id }) => ({
-  ...shop.items.find((item) => item.id === id),
-  quantity: cart.items[id],
+const mapStateToProps = (state, { id }) => ({
+  ...selectItem(id)(state),
+  quantity: selectItemQuantity(id)(state),
 });
 
 const mapDispatchToProps = (dispatch, { id }) => ({

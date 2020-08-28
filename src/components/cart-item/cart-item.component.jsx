@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { selectItem } from "../../redux/shop/shop.selectors";
+import { selectItemQuantity } from "../../redux/cart/cart.selectors";
+
 import "./cart-item.styles.scss";
 
 const CartItem = ({ id, name, imageUrl, price, quantity }) => {
@@ -15,9 +18,9 @@ const CartItem = ({ id, name, imageUrl, price, quantity }) => {
   );
 };
 
-const mapStateToProps = ({ cart, shop }, { id }) => ({
-  ...shop.items.find((item) => item.id === id),
-  quantity: cart.items[id],
+const mapStateToProps = (state, { id }) => ({
+  ...selectItem(id)(state),
+  quantity: selectItemQuantity(id)(state),
 });
 
 export default connect(mapStateToProps)(CartItem);
