@@ -8,12 +8,18 @@ export const selectShopCollections = createSelector(
   (shop) => shop.collections
 );
 
+export const selectShopCollectionsAsArray = createSelector(
+  selectShopCollections,
+  (collections) => Object.values(collections)
+);
+
 export const selectShopItems = createSelector(selectShop, (shop) => shop.items);
 
 export const selectCollection = memoize((collectionUrlParam) =>
   createSelector(
     selectShopCollections,
-    (collections) => collections[collectionUrlParam]
+    (collections) =>
+      collections[collectionUrlParam] || { title: "no such collection" }
   )
 );
 

@@ -3,7 +3,7 @@ import React from "react";
 import "./collection-list.styles.scss";
 import CollectionItem from "../collection-item/collection-item.component";
 
-const CollectionList = ({ title, itemIds, numberOfItems }) => {
+const CollectionList = ({ title, itemIds = [], numberOfItems }) => {
   const itemIdsToShow = numberOfItems
     ? itemIds.slice(0, numberOfItems)
     : itemIds;

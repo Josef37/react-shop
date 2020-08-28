@@ -16,24 +16,18 @@ const cartReducer = (state = INITIAL_STATE, action) => {
     }
     case CartActionTypes.ADD_ITEM_TO_CART: {
       const itemId = action.payload;
+      const quantity = state.items[itemId] ? state.items[itemId].quantity : 0;
       return {
         ...state,
-        items: setItemQuantity(
-          state.items,
-          itemId,
-          (state.items[itemId] || 0) + 1
-        ),
+        items: setItemQuantity(state.items, itemId, quantity + 1),
       };
     }
     case CartActionTypes.SUBTRACT_ITEM_FROM_CART: {
       const itemId = action.payload;
+      const quantity = state.items[itemId] ? state.items[itemId].quantity : 0;
       return {
         ...state,
-        items: setItemQuantity(
-          state.items,
-          itemId,
-          (state.items[itemId] || 0) - 1
-        ),
+        items: setItemQuantity(state.items, itemId, quantity - 1),
       };
     }
     case CartActionTypes.REMOVE_ITEM_FROM_CART: {

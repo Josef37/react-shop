@@ -7,25 +7,22 @@ const cartItemsSelector = createSelector([cartSelector], (cart) => cart.items);
 
 export const cartItemsCountSelector = createSelector(
   cartItemsSelector,
-  (items) => Object.values(items).reduce((sum, cur) => sum + cur, 0)
+  (items) =>
+    Object.values(items).reduce((sum, { quantity }) => sum + quantity, 0)
 );
 
 export const cartItemIdsSelector = createSelector(cartItemsSelector, (items) =>
-  Object.keys(items).map((id) => parseInt(id))
+  Object.values(items).map(({ itemId }) => itemId)
 );
 
 export const cartTotalSelector = createSelector(
   [cartItemsSelector, selectShopItems],
-  (cartItems, shopItems) => {
-    let total = 0;
-    for (let id in cartItems) {
-      const itemId = parseInt(id);
-      const quantity = cartItems[id];
-      const price = shopItems[itemId].price;
-      total += price * quantity;
-    }
-    return total;
-  }
+  (cartItems, shopItems) =>
+    Object.values(cartItems).reduce(
+      (total, { itemId, quantity }) =>
+        total + quantity * shopItems[itemId].price,
+      0
+    )
 );
 
 export const selectCartHidden = createSelector(
@@ -34,5 +31,5 @@ export const selectCartHidden = createSelector(
 );
 
 export const selectItemQuantity = memoize((itemId) =>
-  createSelector(cartItemsSelector, (cart) => cart[itemId])
+  createSelector(cartItemsSelector, (cart) => cart[itemId].quantity)
 );

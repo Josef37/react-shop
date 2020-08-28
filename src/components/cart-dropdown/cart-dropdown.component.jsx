@@ -20,7 +20,7 @@ const CartDropdown = ({ cartItemIds, toggleCart }) => {
           <span className="empty-message">Your cart is empty</span>
         )}
       </div>
-      <Link className="checkout-link" to="checkout" onClick={toggleCart}>
+      <Link className="checkout-link" to="/checkout" onClick={toggleCart}>
         <CustomButton>GO TO CHECKOUT</CustomButton>
       </Link>
     </div>
