@@ -1,4 +1,4 @@
-.collection-preview {
+.collection-list {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
@@ -10,6 +10,7 @@
 
   .preview {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }
