@@ -1,13 +1,9 @@
 import React from "react";
 
-import "./custom-button.styles.scss";
+import { StyledCustomButton } from "./custom-button.styles";
 
-const CustomButton = ({ children, className, ...otherProps }) => {
-  return (
-    <button className={"custom-button " + className} {...otherProps}>
-      {children}
-    </button>
-  );
+const CustomButton = ({ children, ...props }) => {
+  return <StyledCustomButton {...props}>{children}</StyledCustomButton>;
 };
 
 export default CustomButton;

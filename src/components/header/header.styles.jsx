@@ -1,0 +1,25 @@
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+export const StyledHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  position: relative;
+`;
+
+export const LogoLink = styled(Link)`
+  padding: 20px;
+`;
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const OptionLink = styled(Link)`
+  padding: 10px 15px;
+  cursor: pointer;
+`;

@@ -4,28 +4,32 @@ import { connect } from "react-redux";
 import { addItemToCart } from "../../redux/cart/cart.actions";
 import { selectItem } from "../../redux/shop/shop.selectors";
 
-import CustomButton from "../custom-button/custom-button.component";
-import "./collection-item.styles.scss";
+import {
+  StyledCollectionItem,
+  Image,
+  Footer,
+  StyledCustomButton,
+} from "./collection-item.styles";
 
 const CollectionItem = ({ id, name, imageUrl, price, addItem }) => {
   return (
-    <div className="collection-item">
-      <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
-      <CustomButton className="inverted" onClick={() => addItem(id)}>
+    <StyledCollectionItem>
+      <Image imageUrl={imageUrl} />
+      <StyledCustomButton isInverted onClick={addItem}>
         ADD TO CART
-      </CustomButton>
-      <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">$ {price}</span>
-      </div>
-    </div>
+      </StyledCustomButton>
+      <Footer>
+        <span>{name}</span>
+        <span>$ {price}</span>
+      </Footer>
+    </StyledCollectionItem>
   );
 };
 
 const mapStateToProps = (state, { id }) => selectItem(id)(state);
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (itemId) => dispatch(addItemToCart(itemId)),
+const mapDispatchToProps = (dispatch, { id }) => ({
+  addItem: () => dispatch(addItemToCart(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionItem);
