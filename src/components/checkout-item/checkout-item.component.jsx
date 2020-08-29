@@ -9,10 +9,10 @@ import {
 import { selectItem } from "../../redux/shop/shop.selectors";
 import { selectItemQuantity } from "../../redux/cart/cart.selectors";
 
-import "./checkout-item.styles.scss";
+import { StyledControl } from "./checkout-item.styles";
 
 const CheckoutItem = ({
-  id,
+  className,
   name,
   imageUrl,
   price,
@@ -22,23 +22,17 @@ const CheckoutItem = ({
   removeItem,
 }) => {
   return (
-    <div className="checkout-item">
+    <div className={className}>
       <img src={imageUrl} alt="item" />
-      <span className="description">{name}</span>
-      <span className="quantity-controls">
-        <span className="quantity-down" onClick={subtractItem}>
-          &#10092;
-        </span>
-        <span className="quantity">{quantity}</span>
-        <span className="quantity-up" onClick={addItem}>
-          &#10093;
-        </span>
+      <span>{name}</span>
+      <span>
+        <StyledControl onClick={subtractItem}>&#10092;</StyledControl>
+        <span>{quantity}</span>
+        <StyledControl onClick={addItem}>&#10093;</StyledControl>
       </span>
-      <span className="price">$ {price}</span>
-      <span className="remove-controls">
-        <span className="remove" onClick={removeItem}>
-          &#9587;
-        </span>
+      <span>$ {price}</span>
+      <span>
+        <StyledControl onClick={removeItem}>&#9587;</StyledControl>
       </span>
     </div>
   );

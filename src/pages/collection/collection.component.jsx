@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 import { selectCollection } from "../../redux/shop/shop.selectors";
 
 import CollectionList from "../../components/collection-list/collection-list.component";
-import "./collection.styles.scss";
 
 const CollectionPage = ({ collection }) => {
   return <CollectionList {...collection} />;

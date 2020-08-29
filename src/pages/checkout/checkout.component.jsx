@@ -7,29 +7,37 @@ import {
   cartTotalSelector,
 } from "../../redux/cart/cart.selectors";
 
-import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import StripeCheckoutButton from "../../components/stripe-checkout-button/stripe-checkout-button.component";
 
-import "./checkout.styles.scss";
+import {
+  StyledCheckoutPage,
+  StyledCheckoutItem,
+  CheckoutHeader,
+  EmptyMessage,
+  CheckoutItems,
+  Total,
+  TestPaymentNotice,
+  Payment,
+} from "./checkout.styles";
 
 const CheckoutPage = ({ itemIds, total }) => (
-  <div className="checkout-page">
-    <div className="checkout-header">
+  <StyledCheckoutPage>
+    <CheckoutHeader>
       <span>Product</span>
       <span>Description</span>
       <span>Quantity</span>
       <span>Price</span>
       <span>Remove</span>
-    </div>
-    <div className="checkout-items">
+    </CheckoutHeader>
+    <CheckoutItems>
       {itemIds.length ? (
-        itemIds.map((id) => <CheckoutItem key={id} id={id} />)
+        itemIds.map((id) => <StyledCheckoutItem key={id} id={id} />)
       ) : (
-        <span className="empty-message">Your cart is empty</span>
+        <EmptyMessage>Your cart is empty</EmptyMessage>
       )}
-    </div>
-    <div className="total">TOTAL: $ {total}</div>
-    <div className="test-payment-notice">
+    </CheckoutItems>
+    <Total>TOTAL: $ {total}</Total>
+    <TestPaymentNotice>
       <p>For test payments please use the following credit card:</p>
       <p>
         Credit Card Number: 4242 4242 4242 4242
@@ -38,11 +46,11 @@ const CheckoutPage = ({ itemIds, total }) => (
         <br />
         CVC: 123
       </p>
-    </div>
-    <div className="payment">
+    </TestPaymentNotice>
+    <Payment>
       <StripeCheckoutButton total={total} />
-    </div>
-  </div>
+    </Payment>
+  </StyledCheckoutPage>
 );
 
 const mapStateToProps = createStructuredSelector({

@@ -1,21 +1,22 @@
 import React from "react";
 
-import "./collection-list.styles.scss";
 import CollectionItem from "../collection-item/collection-item.component";
+
+import { StyledCollectionList, Title, Preview } from "./collection-list.styles";
 
 const CollectionList = ({ title, itemIds = [], numberOfItems }) => {
   const itemIdsToShow = numberOfItems
     ? itemIds.slice(0, numberOfItems)
     : itemIds;
   return (
-    <div className="collection-list">
-      <h1 className="title">{title.toUpperCase()}</h1>
-      <div className="preview">
+    <StyledCollectionList>
+      <Title>{title.toUpperCase()}</Title>
+      <Preview>
         {itemIdsToShow.map((id) => (
           <CollectionItem key={id} id={id} />
         ))}
-      </div>
-    </div>
+      </Preview>
+    </StyledCollectionList>
   );
 };
 

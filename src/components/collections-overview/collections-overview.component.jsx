@@ -6,8 +6,6 @@ import { selectShopCollectionsAsArray } from "../../redux/shop/shop.selectors";
 
 import CollectionList from "../collection-list/collection-list.component";
 
-import "./collections-overview.styles.scss";
-
 const CollectionsOverview = ({ collections }) => (
   <div className="collections-overview">
     {collections.map((collection) => (
