@@ -10,7 +10,7 @@ export const selectShopCollections = createSelector(
 
 export const selectShopCollectionsAsArray = createSelector(
   selectShopCollections,
-  (collections) => Object.values(collections)
+  (collections) => Object.values(collections).sort((c1, c2) => c1.id - c2.id)
 );
 
 export const selectShopItems = createSelector(selectShop, (shop) => shop.items);
