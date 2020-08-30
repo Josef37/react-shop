@@ -8,6 +8,10 @@ import { selectIsFetching } from "../../redux/shop/shop.selectors";
 
 import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.component";
+import withSpinner from "../../components/with-spinner/with-spinner.component";
+
+const CollectionsOverviewWithSpinner = withSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = withSpinner(CollectionPage);
 
 class ShopPage extends React.Component {
   componentDidMount() {
@@ -18,17 +22,13 @@ class ShopPage extends React.Component {
   render() {
     const { match, isFetchingShopData } = this.props;
 
-    if (isFetchingShopData) {
-      return <h1>I'm fetching, you @#*!</h1>;
-    }
-
     return (
       <div className="shop-page">
         <Route exact path={match.path}>
-          <CollectionsOverview />
+          <CollectionsOverviewWithSpinner loading={isFetchingShopData} />
         </Route>
         <Route exact path={`${match.path}/:collectionId`}>
-          <CollectionPage />
+          <CollectionPageWithSpinner loading={isFetchingShopData} />
         </Route>
       </div>
     );
