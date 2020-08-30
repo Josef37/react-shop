@@ -26,3 +26,8 @@ export const selectCollection = memoize((collectionUrlParam) =>
 export const selectItem = memoize((itemId) =>
   createSelector(selectShopItems, (items) => items[itemId])
 );
+
+export const selectIsFetching = createSelector(
+  selectShop,
+  (shop) => shop.isFetching
+);

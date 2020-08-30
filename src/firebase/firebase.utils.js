@@ -49,4 +49,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+const fetchData = async (collectionPath, docTransform) => {
+  const colRef = firestore.collection(collectionPath);
+  const snapshot = await colRef.get();
+  return Object.fromEntries(
+    snapshot.docs.map((doc) => docTransform(doc.data()))
+  );
+};
+
+export const fetchCollections = () => {
+  return fetchData("collections", (coll) => [coll.routeName, coll]);
+};
+
+export const fetchItems = () => {
+  return fetchData("items", (item) => [item.id, item]);
+};
+
 export default firebase;
