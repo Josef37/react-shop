@@ -49,6 +49,15 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
+};
+
 const fetchData = async (collectionPath, docTransform) => {
   const colRef = firestore.collection(collectionPath);
   const snapshot = await colRef.get();
